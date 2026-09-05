@@ -1,0 +1,15 @@
+SITE GARGANTUA — one-pager
+--------------------------
+index.html            la page (ouvrir en double-cliquant)
+suzanne-somogyi.html  page solo, structure prête, textes à remplir
+style.css             tout le style
+fonts/                Akzidenz-Grotesk light / roman / bold (la typo de l'affiche)
+images/affiche        l'affiche officielle
+images/portraits      les 4 portraits
+images/oeuvres        les 14 pièces, recadrées, pixels d'origine intacts
+contenu/              tes textes bruts, mot pour mot
+outils/assets.py      refabrique les images depuis les photos source
+outils/gen.py         réécrit index.html + suzanne-somogyi.html
+
+Pour mettre en ligne : le dossier est autonome, il suffit de le déposer
+tel quel (GitHub Pages, OVH, Netlify). Aucun serveur nécessaire.

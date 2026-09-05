@@ -1,0 +1,208 @@
+{
+ "oeuvres": [
+  {
+   "artist": "thierry-vendome",
+   "titre": "LE PASSAGE",
+   "matiere": "Corolle de rouille, saphir rose (3,66 ct), saphirs roses, or jaune plissé.",
+   "src": "~/Desktop/JPEG image.jpeg",
+   "file": "images/oeuvres/thierry-vendome_01_le-passage_m.jpg",
+   "w": 1208,
+   "h": 1400,
+   "plein": "images/oeuvres/thierry-vendome_01_le-passage.jpg",
+   "pw": 2070,
+   "ph": 2400,
+   "bg": "#ffffff"
+  },
+  {
+   "artist": "faust-cardinali",
+   "titre": "LE BAPTÊME DE PANTAGRUEL",
+   "matiere": "Pendentif. Gargantua 2026.",
+   "src": "~/Desktop/FAUST CARDINALI/FAUST CARDINALI_ LE BAPTÊME DE PANTAGRUEL_-3.jpg",
+   "file": "images/oeuvres/faust-cardinali_01_le-bapteme-de-pantagruel_m.jpg",
+   "w": 933,
+   "h": 1400,
+   "plein": "images/oeuvres/faust-cardinali_01_le-bapteme-de-pantagruel.jpg",
+   "pw": 1600,
+   "ph": 2400,
+   "bg": "#ffffff"
+  },
+  {
+   "artist": "faust-cardinali",
+   "titre": "AMBIGUA NASCENTIA",
+   "matiere": "Pendentif-collier. Gargantua 2026.",
+   "src": "~/Desktop/FAUST CARDINALI/FAUST CARDINALI_ AMBIGUA NASCENTIA -1.jpg",
+   "file": "images/oeuvres/faust-cardinali_02_ambigua-nascentia_m.jpg",
+   "w": 958,
+   "h": 1400,
+   "plein": "images/oeuvres/faust-cardinali_02_ambigua-nascentia.jpg",
+   "pw": 1642,
+   "ph": 2400,
+   "bg": "#ffffff"
+  },
+  {
+   "artist": "faust-cardinali",
+   "titre": "GARGANTUA",
+   "matiere": "Bague. Fonte d’aluminium, creuset en argent, polyester.",
+   "src": "~/Desktop/FAUST CARDINALI/FAUST CARDINALI_ GARGANTUA_BAGUE.jpg",
+   "file": "images/oeuvres/faust-cardinali_03_gargantua_m.jpg",
+   "w": 1400,
+   "h": 1400,
+   "plein": "images/oeuvres/faust-cardinali_03_gargantua.jpg",
+   "pw": 2400,
+   "ph": 2400,
+   "bg": "#ffffff"
+  },
+  {
+   "artist": "faust-cardinali",
+   "titre": "BAT-STARTER II",
+   "matiere": "Bracelet, outil et dispositif de performance.",
+   "src": "~/Desktop/FAUST CARDINALI/GARGANTUA_ FAUST CARDINALI_BAT-STARTER II (GARGANTUA)_6.jpg",
+   "file": "images/oeuvres/faust-cardinali_04_bat-starter-ii_m.jpg",
+   "w": 1400,
+   "h": 933,
+   "plein": "images/oeuvres/faust-cardinali_04_bat-starter-ii.jpg",
+   "pw": 2400,
+   "ph": 1600,
+   "bg": "#efefef"
+  },
+  {
+   "artist": "faust-cardinali",
+   "titre": "MARTA",
+   "matiere": "Sculpture-pinceau accompagnant Bat-Starter II.",
+   "src": "~/Desktop/FAUST CARDINALI/GARGANTUA_ FAUST CARDINALI_MARTA_7.jpg",
+   "file": "images/oeuvres/faust-cardinali_05_marta_m.jpg",
+   "w": 1178,
+   "h": 1400,
+   "plein": "images/oeuvres/faust-cardinali_05_marta.jpg",
+   "pw": 2020,
+   "ph": 2400,
+   "bg": "#ffffff"
+  },
+  {
+   "artist": "amira-sliman",
+   "titre": "MOURIR POUR VIVRE",
+   "matiere": "Broche. Os, or jaune, argent.",
+   "src": "~/Downloads/Gargantua Broche Amira Sliman.jpg",
+   "file": "images/oeuvres/amira-sliman_01_mourir-pour-vivre_m.jpg",
+   "w": 756,
+   "h": 1157,
+   "plein": "images/oeuvres/amira-sliman_01_mourir-pour-vivre.jpg",
+   "pw": 756,
+   "ph": 1157,
+   "bg": "#fdfdfd"
+  },
+  {
+   "artist": "amira-sliman",
+   "titre": "AINSI VINT-IL AU MONDE",
+   "matiere": "Boucles. Argent, aluminium, galalithe.",
+   "src": "~/Downloads/Gargantua Boucles Amira Sliman.png",
+   "file": "images/oeuvres/amira-sliman_02_ainsi-vint-il-au-monde_m.jpg",
+   "w": 629,
+   "h": 1169,
+   "plein": "images/oeuvres/amira-sliman_02_ainsi-vint-il-au-monde.jpg",
+   "pw": 629,
+   "ph": 1169,
+   "bg": "#ffffff"
+  },
+  {
+   "artist": "amira-sliman",
+   "titre": "YOUNG COUPLES",
+   "matiere": "Bague. Ébène, argent, quartz à rutiles.",
+   "src": "~/Downloads/Gargantua Young Couples Amira Sliman.jpg",
+   "file": "images/oeuvres/amira-sliman_03_young-couples_m.jpg",
+   "w": 712,
+   "h": 828,
+   "plein": "images/oeuvres/amira-sliman_03_young-couples.jpg",
+   "pw": 712,
+   "ph": 828,
+   "bg": "#fffeff"
+  },
+  {
+   "artist": "amira-sliman",
+   "titre": "THÉLÈME",
+   "matiere": "Collier. Ébène, or jaune, argent.",
+   "src": "~/Downloads/Gargantua Collier Amira Sliman.png",
+   "file": "images/oeuvres/amira-sliman_04_theleme_m.jpg",
+   "w": 1080,
+   "h": 1064,
+   "plein": "images/oeuvres/amira-sliman_04_theleme.jpg",
+   "pw": 1080,
+   "ph": 1064,
+   "bg": "#fefefe"
+  },
+  {
+   "artist": "agnes-dubois",
+   "titre": "CORNUCOPIA",
+   "matiere": "Bracelet et boucles d’oreilles. Argent et perles d’eau douce. 2026.",
+   "src": "~/Desktop/Gargantua Agnes Dubois Cornucopia (1).JPG",
+   "file": "images/oeuvres/agnes-dubois_01_cornucopia_m.jpg",
+   "w": 1400,
+   "h": 995,
+   "plein": "images/oeuvres/agnes-dubois_01_cornucopia.jpg",
+   "pw": 1447,
+   "ph": 1028,
+   "bg": "#eff0f7"
+  },
+  {
+   "artist": "agnes-dubois",
+   "titre": "CORNUCOPIA",
+   "matiere": "Bracelet. Argent. 2026.",
+   "src": "~/Desktop/Agnes Dubois Cornucopia Bracelet.JPG",
+   "file": "images/oeuvres/agnes-dubois_02_cornucopia_m.jpg",
+   "w": 1400,
+   "h": 1070,
+   "plein": "images/oeuvres/agnes-dubois_02_cornucopia.jpg",
+   "pw": 2400,
+   "ph": 1834,
+   "bg": "#dcdbe2"
+  },
+  {
+   "artist": "agnes-dubois",
+   "titre": "SILÈNES",
+   "matiere": "Collier. Laiton patiné et corne. 2026.",
+   "src": "~/Desktop/Agnes Dubois Silenes Collier (1).JPG",
+   "file": "images/oeuvres/agnes-dubois_03_silenes_m.jpg",
+   "w": 704,
+   "h": 1400,
+   "plein": "images/oeuvres/agnes-dubois_03_silenes.jpg",
+   "pw": 1207,
+   "ph": 2400,
+   "bg": "#f5f6f8"
+  },
+  {
+   "artist": "agnes-dubois",
+   "titre": "SILÈNES",
+   "matiere": "Collier. Laiton patiné et corne. 2026.",
+   "src": "~/Desktop/Agnes Dubois Silenes Collier (2).JPG",
+   "file": "images/oeuvres/agnes-dubois_04_silenes_m.jpg",
+   "w": 694,
+   "h": 1400,
+   "plein": "images/oeuvres/agnes-dubois_04_silenes.jpg",
+   "pw": 1190,
+   "ph": 2400,
+   "bg": "#f4f8fd"
+  }
+ ],
+ "portraits": {
+  "thierry-vendome": {
+   "file": "images/portraits/thierry-vendome.jpg",
+   "w": 820,
+   "h": 574
+  },
+  "faust-cardinali": {
+   "file": "images/portraits/faust-cardinali.jpg",
+   "w": 820,
+   "h": 820
+  },
+  "amira-sliman": {
+   "file": "images/portraits/amira-sliman.jpg",
+   "w": 656,
+   "h": 820
+  },
+  "agnes-dubois": {
+   "file": "images/portraits/agnes-dubois.jpg",
+   "w": 485,
+   "h": 550
+  }
+ }
+}
