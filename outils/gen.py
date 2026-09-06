@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import json, html
+import json, html, re, os
 S='/Users/hamouda/Desktop/project amira parcour/SITE_GARGANTUA/'
 M=json.load(open(S+'images/manifest.json'))
 oe={}
@@ -54,10 +54,25 @@ PROJET=["Gargantua, au-delà du personnage truculent imaginé par Rabelais, inca
 
 def esc(s): return s
 
+NB=' '   # espace fine insecable : francais avant : ; ! ? et dans les guillemets
+def typo(s):
+    s=re.sub(r'(?<=\S) (?=[:;!?»])', NB, s)
+    s=s.replace('« ','«'+NB)
+    return s
+
+FL='<svg class="fl" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.6 9.4 9.4 2.6M4.3 2.6h5.1v5.1"/></svg>'
+
+# portraits : le fichier de base + la version HD deja dans le dossier (meme photo, mesure)
+PORTRAIT_HD={'amira-sliman':('images/portraits/amira_sliman.jpg',1080),
+             'faust-cardinali':('images/portraits/faust_cardinali.jpg',1080),
+             'thierry-vendome':('images/portraits/thierry_vendome.jpg',1000)}
+
 def navlab(nom):
     pre,_,last=nom.rpartition(' ')
     return '<span class="fn">%s </span>%s'%(pre,last)
 nav=''.join('<a href="#%s">%s</a>'%(a['k'],navlab(a['nom'])) for a in ARTISTES)
+fil=''.join('<a href="#%s">%s</a>'%(a['k'],a['nom']) for a in ARTISTES)
+noms=', '.join('<a href="#%s">%s</a>'%(a['k'],a['nom']) for a in ARTISTES)
 
 secs=[]
 for i,a in enumerate(ARTISTES):
@@ -68,67 +83,101 @@ for i,a in enumerate(ARTISTES):
     note='<p class="credit" style="margin-top:16px">%s</p>'%a['note'] if a.get('note') else ''
     ocred='<p class="credit">%s</p>'%a['credit_oeuvres'] if a['credit_oeuvres'] else ''
     sens='' if i%2==0 else ' piece--inv'
+    srcset='%s %dw'%(p['file'],p['w'])
+    if a['k'] in PORTRAIT_HD: srcset+=', %s %dw'%PORTRAIT_HD[a['k']]
     secs.append('''
-<section class="artiste" id="%s">
- <div class="artiste__h"><h2>%s</h2><span>%s / 04</span></div>
- <div class="piece%s">
-  <figure class="piece__im" role="button" tabindex="0" aria-label="Voir %s en grand"
-          data-full="%s" data-bg="%s" data-titre="%s" data-mat="%s" data-cred="%s" data-nom="%s">
-   <img src="%s" width="%d" height="%d" alt="%s, %s" loading="lazy">
+<section class="artiste" id="{k}">
+ <div class="artiste__h"><h2>{nom}</h2><span>{n} / 04</span></div>
+ <div class="piece{sens}">
+  <figure class="piece__im" role="button" tabindex="0" aria-label="Voir {titre} en grand"
+          data-full="{plein}" data-bg="{bg}" data-titre="{titre}" data-mat="{mat}" data-cred="{cred}" data-nom="{nom}">
+   <img src="{file}" width="{w}" height="{h}" alt="{titre}, {nom}" loading="lazy" decoding="async">
    <figcaption>
-    <h3>%s</h3>
-    <p>%s</p>
-    %s
-    <span class="zoom">Voir en grand <i>&#8599;</i></span>
+    <h3>{titre}</h3>
+    <p>{mat}</p>
+    {ocred}
+    <span class="zoom">Voir en grand {fl}</span>
    </figcaption>
   </figure>
   <div class="piece__t">
-   <figure class="pf"><img src="%s" width="%d" height="%d" alt="Portrait de %s" loading="lazy">%s</figure>
-   <div class="prose">%s%s</div>
+   <figure class="pf"><img src="{pfile}" srcset="{srcset}" sizes="(max-width:620px) calc(100vw - 40px), 230px" width="{pw}" height="{ph}" alt="Portrait de {nom}" loading="lazy" decoding="async">{pcred}</figure>
+   <div class="prose">{bio}{note}</div>
   </div>
  </div>
-</section>'''%(a['k'],esc(a['nom']),a['n'],sens,
-    esc(o['titre']),o['file'],o['bg'],esc(o['titre']),esc(o['matiere']),a['credit_oeuvres'],esc(a['nom']),
-    o['file'],o['w'],o['h'],esc(o['titre']),esc(a['nom']),
-    esc(o['titre']),esc(o['matiere']),ocred,
-    p['file'],p['w'],p['h'],esc(a['nom']),pcred,bio,note))
+</section>'''.format(k=a['k'],nom=esc(a['nom']),n=a['n'],sens=sens,
+    titre=esc(o['titre']),plein=o['plein'],bg=o['bg'],mat=esc(o['matiere']),cred=a['credit_oeuvres'],
+    file=o['file'],w=o['w'],h=o['h'],ocred=ocred,fl=FL,
+    pfile=p['file'],srcset=srcset,pw=p['w'],ph=p['h'],pcred=pcred,bio=bio,note=note))
 
-doc='''<!doctype html>
+JSONLD='''<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ExhibitionEvent","name":"Gargantua",
+"description":"Exposition de bijou contemporain, Parcours Bijoux Paris 2026. Projet initié par Amira Sliman. Agnès Dubois, Faust Cardinali, Thierry Vendome, Amira Sliman.",
+"startDate":"2026-10-05","endDate":"2026-10-17",
+"eventStatus":"https://schema.org/EventScheduled","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
+"location":{"@type":"Place","name":"Galerie Psyché Paris","address":{"@type":"PostalAddress","streetAddress":"18 rue du Pont Louis Philippe","postalCode":"75004","addressLocality":"Paris","addressCountry":"FR"}},
+"performer":[{"@type":"Person","name":"Agnès Dubois"},{"@type":"Person","name":"Faust Cardinali"},{"@type":"Person","name":"Thierry Vendome"},{"@type":"Person","name":"Amira Sliman"}],
+"organizer":{"@type":"Organization","name":"d’un bijou à l’autre"},
+"superEvent":{"@type":"Event","name":"Parcours Bijoux Paris 2026","startDate":"2026-10-01","endDate":"2026-10-31","url":"https://www.parcoursbijoux.com"},
+"subEvent":[
+ {"@type":"Event","name":"Vernissage de Gargantua","startDate":"2026-10-08T18:00:00+02:00","location":{"@type":"Place","name":"Galerie Psyché Paris","address":"18 rue du Pont Louis Philippe, 75004 Paris"}},
+ {"@type":"Event","name":"Rencontre autour de Gargantua","startDate":"2026-10-08T14:00:00+02:00","location":{"@type":"Place","name":"Espace L’Échappée Belle"}}]}
+</script>'''
+
+HEAD='''<!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Gargantua · Parcours Bijoux 2026</title>
 <meta name="description" content="Gargantua. Une proposition pour le Parcours Bijoux 2026, projet initié par Amira Sliman. Agnès Dubois, Faust Cardinali, Thierry Vendome, Amira Sliman. Galerie Psyché Paris, 5 au 17 octobre 2026.">
+<meta name="theme-color" content="#ffffff">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gargantua · Parcours Bijoux Paris 2026">
+<meta property="og:description" content="Vous êtes invités. Agnès Dubois, Faust Cardinali, Thierry Vendome, Amira Sliman. Galerie Psyché Paris, 05 au 17 octobre 2026. Vernissage le 08 octobre à 18h.">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://gargantua-paris.github.io/">
+<meta property="og:image" content="https://gargantua-paris.github.io/images/affiche/affiche_gargantua.jpg">
+<meta property="og:image:width" content="1080">
+<meta property="og:image:height" content="1350">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
 <link rel="apple-touch-icon" href="favicon-180.png">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=20260906c">
+{jsonld}
 </head>
 <body>
+<script>document.documentElement.classList.add('js')</script>
 
 <header class="bar">
  <a class="bar__b" href="#top">Gargantua</a>
- <nav class="bar__n">%s</nav>
+ <nav class="bar__n">{nav}</nav>
 </header>
+<div class="fil" aria-hidden="true">
+ <a class="fil__b" href="#top">Gargantua</a>
+ <nav class="fil__n">{fil}</nav>
+</div>
+'''
 
+BODY='''
 <main>
 
 <section class="hero" id="top">
+ <p class="hero__k lbl">Parcours Bijoux Paris 2026</p>
  <h1>Gargantua.</h1>
  <div class="hero__sub">
   <em>Projet initié par Amira Sliman</em>
  </div>
 
  <p class="invit">Vous êtes invités.</p>
+ <p class="noms">{noms}</p>
 
  <div class="meta">
   <div><span class="lbl">Dates</span><p>05 au 17 octobre 2026</p></div>
   <div><span class="lbl">Lieu</span>
-   <p><a class="carte" href="https://www.google.com/maps/search/?api=1&amp;query=Galerie+Psych%%C3%%A9%%2C+18+rue+du+Pont+Louis+Philippe%%2C+75004+Paris"
-         target="_blank" rel="noopener">Galerie Psyché Paris<br>18 rue du Pont Louis Philippe<br>75004 Paris<span class="carte__k">Voir sur la carte <i>&#8599;</i></span></a></p></div>
-  <div><span class="lbl">Vernissage</span><p>08 octobre à 18h</p></div>
-  <div><span class="lbl">Rencontre autour de Gargantua</span><p>08 octobre à 14h<br>Espace L’Échappée Belle</p></div>
+   <p><a class="carte" href="https://www.google.com/maps/search/?api=1&amp;query=Galerie+Psych%C3%A9%2C+18+rue+du+Pont+Louis+Philippe%2C+75004+Paris"
+         target="_blank" rel="noopener">Galerie Psyché Paris<br>18 rue du Pont Louis Philippe<br>75004 Paris<span class="k">Voir sur la carte {fl}</span></a></p></div>
+  <div><span class="lbl">Vernissage</span><p>08 octobre à 18h</p><a class="k" href="agenda/vernissage.ics">Ajouter à l’agenda {fl}</a></div>
+  <div><span class="lbl">Rencontre autour de Gargantua</span><p>08 octobre à 14h<br>Espace L’Échappée Belle</p><a class="k" href="agenda/rencontre.ics">Ajouter à l’agenda {fl}</a></div>
  </div>
 </section>
 
@@ -142,7 +191,7 @@ doc='''<!doctype html>
    réunit 33 expositions et plus de 200 artistes dans toute la ville : galeries, musées,
    écoles, centres culturels et ateliers d’artistes, d’une rive à l’autre. S’y ajoutent
    un colloque international, des performances et des rencontres.</p>
-   <p><a class="lien" href="https://www.parcoursbijoux.com" target="_blank" rel="noopener">parcoursbijoux.com <i>&#8599;</i></a></p>
+   <p><a class="lien" href="https://www.parcoursbijoux.com" target="_blank" rel="noopener">parcoursbijoux.com {fl}</a></p>
   </div>
  </div>
  <div class="rule"></div>
@@ -150,7 +199,7 @@ doc='''<!doctype html>
 
 <section class="affiche">
  <figure>
-  <img src="images/affiche/affiche_gargantua.jpg" width="1080" height="1350" alt="Affiche Gargantua, Parcours Bijoux Paris 2026">
+  <img src="images/affiche/affiche_gargantua.jpg" width="1080" height="1350" alt="Affiche Gargantua, Parcours Bijoux Paris 2026" decoding="async">
   <figcaption><span class="lbl">Parcours Bijoux Paris 2026</span><span class="lbl">Affiche de Gargantua</span></figcaption>
  </figure>
 </section>
@@ -158,19 +207,26 @@ doc='''<!doctype html>
 <section>
  <div class="split">
   <div><span class="lbl">Le projet</span></div>
-  <div class="prose">%s</div>
+  <div class="prose">{projet}</div>
  </div>
  <div class="rule"></div>
 </section>
 
-%s
+{secs}
 
 </main>
 
 <div class="vue" id="vue" hidden>
+ <span class="lbl vue__k" id="vueK"></span>
  <button class="vue__x" aria-label="Fermer">&#215;</button>
- <img id="vueIm" alt="">
- <div class="vue__c"><h3 id="vueT"></h3><p id="vueM"></p><p class="credit" id="vueC"></p></div>
+ <div class="vue__s"><img id="vueIm" alt=""></div>
+ <div class="vue__c">
+  <div><h3 id="vueT"></h3><p id="vueM"></p><p class="credit" id="vueC"></p></div>
+  <div class="vue__n">
+   <button type="button" id="vuePrec" aria-label="Pièce précédente"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M11.5 3 5.5 9l6 6"/></svg></button>
+   <button type="button" id="vueSuiv" aria-label="Pièce suivante"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M6.5 3l6 6-6 6"/></svg></button>
+  </div>
+ </div>
 </div>
 
 <footer>
@@ -197,94 +253,98 @@ doc='''<!doctype html>
   </div>
  </div>
 </footer>
+'''
 
+SCRIPT='''
 <script>
-/* visionneuse plein ecran */
-const vue=document.getElementById('vue'),vueIm=document.getElementById('vueIm');
-let lastFocus=null;
-function ouvrir(f){
-  lastFocus=f;
+/* barre : compacte et blanche une fois la page defilee ; fil du telephone apres le hero */
+const bar=document.querySelector('.bar'),fil=document.querySelector('.fil'),hero=document.getElementById('top');
+function defile(){
+  const y=scrollY;
+  bar.classList.toggle('on',y>24);
+  fil.classList.toggle('on',y>hero.offsetTop+hero.offsetHeight-140);
+}
+addEventListener('scroll',defile,{passive:true}); defile();
+
+/* apparitions au defilement */
+const rv=[...document.querySelectorAll('.split,.affiche figure,.artiste__h,.piece__im,.piece__t,.foot')];
+rv.forEach(e=>e.classList.add('rv'));
+const ro=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('on');ro.unobserve(e.target);}
+}),{rootMargin:'0px 0px -6% 0px',threshold:.04});
+rv.forEach(e=>ro.observe(e));
+
+/* visionneuse plein ecran, les quatre pieces a la suite */
+const vue=document.getElementById('vue'),vueIm=document.getElementById('vueIm'),
+      pieces=[...document.querySelectorAll('.piece__im')];
+let cur=-1,lastFocus=null;
+function charger(i){ const im=new Image(); im.src=pieces[(i+pieces.length)%pieces.length].dataset.full; }
+function montrer(i){
+  cur=(i+pieces.length)%pieces.length; const f=pieces[cur];
   vueIm.src=f.dataset.full; vueIm.alt=f.dataset.titre+', '+f.dataset.nom;
   vue.style.background=f.dataset.bg;
+  document.getElementById('vueK').textContent=String(cur+1).padStart(2,'0')+' / '+String(pieces.length).padStart(2,'0')+'\\u2002'+f.dataset.nom;
   document.getElementById('vueT').textContent=f.dataset.titre;
   document.getElementById('vueM').textContent=f.dataset.mat;
   document.getElementById('vueC').textContent=f.dataset.cred||'';
+  charger(cur+1); charger(cur-1);
+}
+function ouvrir(f){
+  lastFocus=f; montrer(pieces.indexOf(f));
   vue.hidden=false; document.body.style.overflow='hidden';
   vue.querySelector('.vue__x').focus();
 }
 function fermer(){ vue.hidden=true; vueIm.removeAttribute('src'); document.body.style.overflow='';
   if(lastFocus) lastFocus.focus(); }
-document.querySelectorAll('.piece__im').forEach(f=>{
+pieces.forEach(f=>{
   f.addEventListener('click',e=>{ if(!e.target.closest('.credit')) ouvrir(f); });
   f.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();ouvrir(f);} });
 });
-vue.addEventListener('click',fermer);
-addEventListener('keydown',e=>{ if(e.key==='Escape'&&!vue.hidden) fermer(); });
+vue.addEventListener('click',e=>{ if(!e.target.closest('.vue__c')) fermer(); });
+document.getElementById('vuePrec').addEventListener('click',()=>montrer(cur-1));
+document.getElementById('vueSuiv').addEventListener('click',()=>montrer(cur+1));
+addEventListener('keydown',e=>{
+  if(vue.hidden) return;
+  if(e.key==='Escape') fermer();
+  else if(e.key==='ArrowRight') montrer(cur+1);
+  else if(e.key==='ArrowLeft') montrer(cur-1);
+});
+let tx=null;
+vue.addEventListener('touchstart',e=>{ tx=e.changedTouches[0].clientX; },{passive:true});
+vue.addEventListener('touchend',e=>{
+  if(tx===null) return; const dx=e.changedTouches[0].clientX-tx; tx=null;
+  if(Math.abs(dx)>56){ montrer(dx<0?cur+1:cur-1); }
+},{passive:true});
 
-const links=[...document.querySelectorAll('.bar__n a')];
+/* nom actif dans la barre et dans le fil */
+const links=[...document.querySelectorAll('.bar__n a')],fils=[...document.querySelectorAll('.fil__n a')];
 const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
 const io=new IntersectionObserver(es=>{
   es.forEach(e=>{
     const i=secs.indexOf(e.target);
     if(i<0)return;
-    if(e.isIntersecting){links.forEach(l=>l.classList.remove('on'));links[i].classList.add('on');}
+    if(e.isIntersecting){
+      links.forEach(l=>l.classList.remove('on'));fils.forEach(l=>l.classList.remove('on'));
+      links[i].classList.add('on');fils[i].classList.add('on');
+    }
   });
-},{rootMargin:'-45%% 0px -50%% 0px',threshold:0});
+},{rootMargin:'-45% 0px -50% 0px',threshold:0});
 secs.forEach(s=>s&&io.observe(s));
 </script>
 
 </body>
 </html>
-'''%(nav,''.join('<p>%s</p>'%p for p in PROJET),''.join(secs))
+'''
+
+head=HEAD.replace('{jsonld}',JSONLD).replace('{nav}',nav).replace('{fil}',fil)
+body=BODY.replace('{noms}',noms).replace('{fl}',FL).replace('{projet}',''.join('<p>%s</p>'%p for p in PROJET)).replace('{secs}',''.join(secs))
+doc=head+typo(body)+SCRIPT
 
 open(S+'index.html','w').write(doc)
 print('index.html',len(doc),'octets')
 
-# --- page solo Suzanne (structure, textes à remplir) ---
-solo='''<!doctype html>
-<html lang="fr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Suzanne Somogyi</title>
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-<link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
-<link rel="apple-touch-icon" href="favicon-180.png">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<header class="bar">
- <a class="bar__b" href="index.html">Gargantua</a>
- <nav class="bar__n"><a href="index.html">Retour</a></nav>
-</header>
-<main>
-<section class="hero" id="top">
- <h1>Suzanne&nbsp;Somogyi.</h1>
- <div class="hero__sub"><span class="ph">Exposition solo, sous-titre à venir.</span></div>
- <div class="meta">
-  <div><span class="lbl">Dates</span><p class="ph">à venir</p></div>
-  <div><span class="lbl">Lieu</span><p class="ph">à venir</p></div>
-  <div><span class="lbl">Vernissage</span><p class="ph">à venir</p></div>
- </div>
-</section>
-<section>
- <div class="split">
-  <div><span class="lbl">Le projet</span></div>
-  <div class="prose"><p class="ph">Texte de présentation à venir.</p></div>
- </div>
- <div class="rule"></div>
-</section>
-<section>
- <div class="split">
-  <div><span class="lbl">Bio</span></div>
-  <div class="prose"><p class="ph">Bio à venir.</p></div>
- </div>
- <a class="retour" href="index.html">Retour à Gargantua</a>
-</section>
-</main>
-<footer><div class="foot"><div><span class="lbl">Galerie</span><p>Amira Sliman</p></div></div></footer>
-</body>
-</html>
-'''
-open(S+'suzanne-somogyi.html','w').write(solo)
-print('suzanne-somogyi.html ok')
+# --- page solo Suzanne : structure d origine, reecrite seulement si le fichier existe deja dans le dossier ---
+if os.path.exists(S+'suzanne-somogyi.html'):
+    solo=open(S+'suzanne-somogyi.html').read()
+    open(S+'suzanne-somogyi.html','w').write(solo)
+    print('suzanne-somogyi.html conserve')

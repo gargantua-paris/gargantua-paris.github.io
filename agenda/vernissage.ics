@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Gargantua//Parcours Bijoux Paris 2026//FR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:vernissage-gargantua-2026@galerie-psyche-paris
+DTSTAMP:20260906T100000Z
+DTSTART:20261008T160000Z
+SUMMARY:Vernissage de Gargantua
+LOCATION:Galerie Psyché Paris\, 18 rue du Pont Louis Philippe\, 75004 Paris
+DESCRIPTION:Gargantua\, Parcours Bijoux Paris 2026. Projet initié par Amira Sliman. Agnès Dubois\, Faust Cardinali\, Thierry Vendome\, Amira Sliman. Exposition du 05 au 17 octobre 2026.
+END:VEVENT
+END:VCALENDAR
