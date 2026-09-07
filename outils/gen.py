@@ -12,11 +12,13 @@ ARTISTES=[
  dict(k='agnes-dubois', nom='Agnès Dubois', n='01',
    credit_portrait='Portrait : galerie bettina flament',
    credit_oeuvres='Photo : Agnès Dubois',
-   bio=["Diplômée de l’AFEDAP en 2000",
-        "Après un parcours en Sciences Humaines et dans l’édition, j’ai choisi de me consacrer au bijou contemporain, me formant à l’AFEDAP Paris à la fin des années 1990. Créatrice indépendante depuis 2001, j’envisage le bijou comme un champ plastique à part entière, un médium à travers lequel j’interroge la relation entre le corps et le monde qui l’environne, entre le geste créatif et l’acte de porter.",
-        "Je conçois le bijou comme un marqueur identitaire, un vecteur de communication capable de signifier autant que de parer. Mes créations, souvent minimalistes, agissent comme révélateurs du corps dans sa présence sensible et se muent en sculptures habitées, en éléments de narration silencieuse.",
-        "L’équilibre, la sensorialité, la notion de plaisir, la cohérence entre espace corporel et extra-corporel nourrissent ma recherche formelle. J’explore l’art du lien : celui entre l’objet et le mouvement, le geste et l’émotion, entre l’artiste (moi-même) et la personne qui s’approprie l’objet.",
-        "Mon travail est régulièrement présenté dans des galeries dédiées au bijou contemporain, à Paris et en région, et je participe depuis plus de vingt ans à des événements liés aux métiers d’art. J’ai pris part au festival Parcours Bijoux, notamment en 2020 et 2023, en tant que porteuse de projets collectifs."]),
+   bio=["Ma vocation de créatrice indépendante débute dès 2001 après une formation de deux ans à l’AFEDAP Paris.",
+        "J’envisage le bijou comme un champ plastique à part entière, un médium à travers lequel j’observe la relation entre le corps et le monde qui l’environne. Tel un marqueur identitaire, il agit comme un véritable vecteur de communication, capable de signifier autant que de parer.",
+        "Ma priorité vise à dépasser la dimension sociale, codifiée, à exacerber la singularité de ces objets intimement reliés à la sphère charnelle et spirituelle de l’individu. J’aime penser qu’ils sont la quintessence d’une vérité profonde, une affirmation de soi.",
+        "Mes créations, souvent minimalistes, agissent comme révélateurs du corps dans sa présence sensible et se muent en sculptures habitées, en éléments de narration silencieuse.",
+        "L’équilibre, la sensorialité, la notion de plaisir, la cohésion entre espace corporel et extracorporel nourrissent ma recherche symbolique et formelle. J’explore l’art du lien : celui entre l’objet et le mouvement, le geste et l’émotion, entre l’artiste et la personne qui s’approprie physiquement l’objet.",
+        "Mon travail est régulièrement présenté dans des galeries dédiées au bijou contemporain à Paris et en région.",
+        "J’ai pris part aux précédentes éditions du festival Parcours Bijoux, notamment en 2020 et 2023, en tant que curatrice de projets collectifs."]),
  dict(k='faust-cardinali', nom='Faust Cardinali', n='02',
    credit_portrait='',
    credit_oeuvres='Photo : Alessandro Schinco',
@@ -28,7 +30,7 @@ ARTISTES=[
         "Mes créations traduisent la liquidité du monde contemporain, marquée par les blessures historiques, psychologiques et géologiques, révélant de nouvelles formes de « polycorps » : une conception de l’art non pas in situ, mais in tempore.",
         "Mes œuvres figurent dans d’importantes collections en Europe et en Asie."]),
  dict(k='thierry-vendome', nom='Thierry Vendome', n='03',
-   credit_portrait='Thierry Vendome, crédit photo : The French Jewelry Post',
+   credit_portrait='Thierry Vendome, crédit photo : Olivier Foulon',
    credit_oeuvres='Photo : @olivierfoulonstudio',
    bio=["<span class=\"up\">MES BIJOUX SONT DES ACTES POÉTIQUES</span>",
         "Je ne cherche pas tant à représenter le visible qu’à exprimer des émotions qui me sont inspirées par ma vision du monde. C’est pourquoi je suis fasciné par les matières « vivantes » chargées d’un passé qu’il me plaît de transformer. Fragments d’éclats d’obus, clous rouillés, fils de fer barbelé, minéraux…",
@@ -63,9 +65,12 @@ def typo(s):
 FL='<svg class="fl" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.6 9.4 9.4 2.6M4.3 2.6h5.1v5.1"/></svg>'
 
 # portraits : le fichier de base + la version HD deja dans le dossier (meme photo, mesure)
+# point focal du recadrage carre (object-position), visage mesure
+FOCAL={'agnes-dubois':'50% 0%','faust-cardinali':'50% 50%','thierry-vendome':'16% 50%','amira-sliman':'50% 24%'}
+
 PORTRAIT_HD={'amira-sliman':('images/portraits/amira_sliman.jpg',1080),
              'faust-cardinali':('images/portraits/faust_cardinali.jpg',1080),
-             'thierry-vendome':('images/portraits/thierry_vendome.jpg',1000)}
+             'thierry-vendome':('images/portraits/thierry_vendome.jpg',1600)}
 
 def navlab(nom):
     pre,_,last=nom.rpartition(' ')
@@ -100,14 +105,14 @@ for i,a in enumerate(ARTISTES):
    </figcaption>
   </figure>
   <div class="piece__t">
-   <figure class="pf"><img src="{pfile}" srcset="{srcset}" sizes="(max-width:620px) calc(100vw - 40px), 230px" width="{pw}" height="{ph}" alt="Portrait de {nom}" loading="lazy" decoding="async">{pcred}</figure>
+   <figure class="pf"><img src="{pfile}" srcset="{srcset}" style="--fp:{fp}" sizes="(max-width:620px) calc(100vw - 40px), 230px" width="{pw}" height="{ph}" alt="Portrait de {nom}" loading="lazy" decoding="async">{pcred}</figure>
    <div class="prose">{bio}{note}</div>
   </div>
  </div>
 </section>'''.format(k=a['k'],nom=esc(a['nom']),n=a['n'],sens=sens,
     titre=esc(o['titre']),plein=o['plein'],bg=o['bg'],mat=esc(o['matiere']),cred=a['credit_oeuvres'],
     file=o['file'],w=o['w'],h=o['h'],ocred=ocred,fl=FL,
-    pfile=p['file'],srcset=srcset,pw=p['w'],ph=p['h'],pcred=pcred,bio=bio,note=note))
+    pfile=p['file'],srcset=srcset,fp=FOCAL[a['k']],pw=p['w'],ph=p['h'],pcred=pcred,bio=bio,note=note))
 
 JSONLD='''<script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ExhibitionEvent","name":"Gargantua",

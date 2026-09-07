@@ -69,7 +69,7 @@ for artist,title,mat,src in OEUVRES:
     print('%-16s %-26s %4dx%-4d bg %s' % (artist,title[:26],im.width,im.height,man[-1]['bg']))
 
 # portraits
-POR=[('thierry-vendome',D+'thierry-vendome-portrait.jpg'),('faust-cardinali',D+'download.jpg'),
+POR=[('thierry-vendome',D+'Crédit photo Olivier Foulon.jpg'),('faust-cardinali',D+'download.jpg'),
      ('amira-sliman',D+'DXC.jpg'),('agnes-dubois',D+'agnes-dubois-bijoux.webp')]
 port={}
 for k,p in POR:

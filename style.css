@@ -133,6 +133,7 @@ section{padding:0 var(--m)}
 }
 .piece__t{display:grid;gap:clamp(18px,2.4vw,30px)}
 .pf{margin:0;max-width:230px}
+.pf img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;object-position:var(--fp,50% 50%)}
 .pf figcaption{margin-top:8px}
 
 /* ---------- visionneuse ---------- */
