@@ -11,7 +11,7 @@ PIECE_AFFICHE={'agnes-dubois':3,'faust-cardinali':1,'thierry-vendome':0,'amira-s
 ARTISTES=[
  dict(k='agnes-dubois', nom='Agnès Dubois', n='01',
    credit_portrait='Portrait : galerie bettina flament',
-   credit_oeuvres='Photos : Agnès Dubois',
+   credit_oeuvres='Photo : Agnès Dubois',
    bio=["Diplômée de l’AFEDAP en 2000",
         "Après un parcours en Sciences Humaines et dans l’édition, j’ai choisi de me consacrer au bijou contemporain, me formant à l’AFEDAP Paris à la fin des années 1990. Créatrice indépendante depuis 2001, j’envisage le bijou comme un champ plastique à part entière, un médium à travers lequel j’interroge la relation entre le corps et le monde qui l’environne, entre le geste créatif et l’acte de porter.",
         "Je conçois le bijou comme un marqueur identitaire, un vecteur de communication capable de signifier autant que de parer. Mes créations, souvent minimalistes, agissent comme révélateurs du corps dans sa présence sensible et se muent en sculptures habitées, en éléments de narration silencieuse.",
@@ -19,8 +19,8 @@ ARTISTES=[
         "Mon travail est régulièrement présenté dans des galeries dédiées au bijou contemporain, à Paris et en région, et je participe depuis plus de vingt ans à des événements liés aux métiers d’art. J’ai pris part au festival Parcours Bijoux, notamment en 2020 et 2023, en tant que porteuse de projets collectifs."]),
  dict(k='faust-cardinali', nom='Faust Cardinali', n='02',
    credit_portrait='',
-   credit_oeuvres='Photos : Alessandro Schinco',
-   note='Représenté en France par la Galerie Minimasterpiece.',
+   credit_oeuvres='Photo : Alessandro Schinco',
+   note='Représenté en France par la Galerie MiniMasterpiece.',
    bio=["Né à Paris en 1961. Artiste pluridisciplinaire, je me forme en tant que sculpteur, peintre et orfèvre.",
         "Mon travail allie dessin et écriture dans une réflexion artistique qui explore la « plastification poétique » de la société, matérialisant un temps à la fois archéologique et « futurible ».",
         "Mes œuvres incarnent simultanément la mémoire du passé, la présence du présent et une vision du futur, dans une seule et même expression plastique et conceptuelle.",
@@ -28,8 +28,8 @@ ARTISTES=[
         "Mes créations traduisent la liquidité du monde contemporain, marquée par les blessures historiques, psychologiques et géologiques, révélant de nouvelles formes de « polycorps » : une conception de l’art non pas in situ, mais in tempore.",
         "Mes œuvres figurent dans d’importantes collections en Europe et en Asie."]),
  dict(k='thierry-vendome', nom='Thierry Vendome', n='03',
-   credit_portrait='Portrait : The French Jewelry Post, « Dans la famille Vendome, Thierry le fils »',
-   credit_oeuvres='Photos : @olivierfoulonstudio',
+   credit_portrait='Portrait : The French Jewelry Post',
+   credit_oeuvres='Photo : @olivierfoulonstudio',
    bio=["<span class=\"up\">MES BIJOUX SONT DES ACTES POÉTIQUES</span>",
         "Je ne cherche pas tant à représenter le visible qu’à exprimer des émotions qui me sont inspirées par ma vision du monde. C’est pourquoi je suis fasciné par les matières « vivantes » chargées d’un passé qu’il me plaît de transformer. Fragments d’éclats d’obus, clous rouillés, fils de fer barbelé, minéraux…",
         "Je les dévie de leur trajectoire. Je les fais entrer dans une nouvelle histoire. La trace visible et irréversible de leur passé sur leur surface devient mon matériau de création. Je les choisis toujours pour une dimension physique, sensorielle et émotionnelle inédite. Un grain, une forme, une couleur.",
@@ -120,7 +120,7 @@ JSONLD='''<script type="application/ld+json">
 "superEvent":{"@type":"Event","name":"Parcours Bijoux Paris 2026","startDate":"2026-10-01","endDate":"2026-10-31","url":"https://www.parcoursbijoux.com"},
 "subEvent":[
  {"@type":"Event","name":"Vernissage de Gargantua","startDate":"2026-10-08T18:00:00+02:00","location":{"@type":"Place","name":"Galerie Psyché Paris","address":"18 rue du Pont Louis Philippe, 75004 Paris"}},
- {"@type":"Event","name":"Rencontre autour de Gargantua","startDate":"2026-10-08T14:00:00+02:00","location":{"@type":"Place","name":"Espace L’Échappée Belle"}}]}
+ {"@type":"Event","name":"Rencontre autour de Gargantua","startDate":"2026-10-08T14:00:00+02:00","location":{"@type":"Place","name":"Espace L’Échappée Belle","address":"rue du Pont Louis Philippe, 75004 Paris"}}]}
 </script>'''
 
 HEAD='''<!doctype html>
@@ -133,7 +133,7 @@ HEAD='''<!doctype html>
 <meta name="theme-color" content="#ffffff">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Gargantua · Parcours Bijoux Paris 2026">
-<meta property="og:description" content="Vous êtes invités. Agnès Dubois, Faust Cardinali, Thierry Vendome, Amira Sliman. Galerie Psyché Paris, 05 au 17 octobre 2026. Vernissage le 08 octobre à 18h.">
+<meta property="og:description" content="Vous êtes invité(e)s. Agnès Dubois, Faust Cardinali, Thierry Vendome, Amira Sliman. Galerie Psyché Paris, 05 au 17 octobre 2026. Vernissage le 08 octobre à 18h.">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:url" content="https://gargantua-paris.github.io/">
 <meta property="og:image" content="https://gargantua-paris.github.io/images/affiche/affiche_gargantua.jpg">
@@ -168,7 +168,7 @@ BODY='''
   <em>Projet initié par Amira Sliman</em>
  </div>
 
- <p class="invit">Vous êtes invités.</p>
+ <p class="invit">Vous êtes invité(e)s.</p>
  <p class="noms">{noms}</p>
 
  <div class="meta">
@@ -177,7 +177,7 @@ BODY='''
    <p><a class="carte" href="https://www.google.com/maps/search/?api=1&amp;query=Galerie+Psych%C3%A9%2C+18+rue+du+Pont+Louis+Philippe%2C+75004+Paris"
          target="_blank" rel="noopener">Galerie Psyché Paris<br>18 rue du Pont Louis Philippe<br>75004 Paris<span class="k">Voir sur la carte {fl}</span></a></p></div>
   <div><span class="lbl">Vernissage</span><p>08 octobre à 18h</p><a class="k" href="agenda/vernissage.ics">Ajouter à l’agenda {fl}</a></div>
-  <div><span class="lbl">Rencontre autour de Gargantua</span><p>08 octobre à 14h<br>Espace L’Échappée Belle</p><a class="k" href="agenda/rencontre.ics">Ajouter à l’agenda {fl}</a></div>
+  <div><span class="lbl">Rencontre autour de Gargantua</span><p>08 octobre à 14h<br>Espace L’Échappée Belle<br>rue du Pont Louis Philippe<br>75004 Paris</p><a class="k" href="agenda/rencontre.ics">Ajouter à l’agenda {fl}</a></div>
  </div>
 </section>
 
