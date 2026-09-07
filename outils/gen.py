@@ -28,7 +28,7 @@ ARTISTES=[
         "Mes créations traduisent la liquidité du monde contemporain, marquée par les blessures historiques, psychologiques et géologiques, révélant de nouvelles formes de « polycorps » : une conception de l’art non pas in situ, mais in tempore.",
         "Mes œuvres figurent dans d’importantes collections en Europe et en Asie."]),
  dict(k='thierry-vendome', nom='Thierry Vendome', n='03',
-   credit_portrait='Portrait : The French Jewelry Post',
+   credit_portrait='Portrait : The French Jewelry Post, « Dans la famille Vendome, Thierry le fils »',
    credit_oeuvres='Photo : @olivierfoulonstudio',
    bio=["<span class=\"up\">MES BIJOUX SONT DES ACTES POÉTIQUES</span>",
         "Je ne cherche pas tant à représenter le visible qu’à exprimer des émotions qui me sont inspirées par ma vision du monde. C’est pourquoi je suis fasciné par les matières « vivantes » chargées d’un passé qu’il me plaît de transformer. Fragments d’éclats d’obus, clous rouillés, fils de fer barbelé, minéraux…",
