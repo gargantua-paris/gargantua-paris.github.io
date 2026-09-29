@@ -275,3 +275,14 @@ footer{margin-top:clamp(80px,12vh,170px);
   .piece__im img{max-height:60vh}
   a{color:inherit}
 }
+
+/* ---------- presentation ---------- */
+.pres .logo{width:clamp(64px,8vw,112px);height:auto;margin-bottom:clamp(28px,5vh,56px)}
+.pres .noms{margin-top:clamp(26px,4vh,52px)}
+.cr{margin-top:clamp(30px,4.5vh,58px)}
+.grille__k{margin-top:clamp(48px,7vh,96px);padding-bottom:10px;border-bottom:1px solid var(--line)}
+.grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));
+  gap:clamp(36px,5vh,64px) clamp(20px,3vw,44px);margin-top:clamp(24px,3.5vh,40px);align-items:start}
+.grille .piece__im{align-items:stretch}
+.grille .piece__im img{width:100%;max-height:none}
+@media(max-width:620px){.grille{grid-template-columns:1fr}}

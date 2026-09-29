@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import json, html, re, os
-S='/Users/hamouda/Desktop/project amira parcour/SITE_GARGANTUA/'
+import json, html, re, os, sys
+S=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/'
 M=json.load(open(S+'images/manifest.json'))
 oe={}
 for o in M['oeuvres']: oe.setdefault(o['artist'],[]).append(o)
@@ -33,10 +33,12 @@ ARTISTES=[
    credit_portrait='Thierry Vendome, crédit photo : Olivier Foulon',
    credit_oeuvres='Photo : @olivierfoulonstudio',
    bio=["<span class=\"up\">MES BIJOUX SONT DES ACTES POÉTIQUES</span>",
-        "Je ne cherche pas tant à représenter le visible qu’à exprimer des émotions qui me sont inspirées par ma vision du monde. C’est pourquoi je suis fasciné par les matières « vivantes » chargées d’un passé qu’il me plaît de transformer. Fragments d’éclats d’obus, clous rouillés, fils de fer barbelé, minéraux…",
-        "Je les dévie de leur trajectoire. Je les fais entrer dans une nouvelle histoire. La trace visible et irréversible de leur passé sur leur surface devient mon matériau de création. Je les choisis toujours pour une dimension physique, sensorielle et émotionnelle inédite. Un grain, une forme, une couleur.",
-        "Ces matières empreintes de leur propre histoire m’inspirent de nouveaux dialogues possibles entre présent et passé, entre mémoire et futur, entre formes brutes et matières délicates. Je cherche à provoquer une expérience immédiate et humaine renvoyant chacun à sa part sensible. À son propre ressenti du vécu.",
-        "En portant mes bijoux, chacun devient sujet de l’expérience."]),
+        "Je ne cherche pas tant à représenter le visible qu’à exprimer les émotions qui me traversent lorsque j’observe le monde.",
+        "Depuis les années 1980, je travaille avec des matières « vivantes », celles qui portent en elles une histoire. Fragments d’éclats d’obus, clous rouillés, fils de fer barbelé, minéraux… Je les dévie de leur trajectoire. Je les fais entrer dans une nouvelle histoire.",
+        "Je ne cherche pas à effacer ce qu’elles ont été. Au contraire, les marques laissées par leur passé, leurs accidents, leurs transformations deviennent mon matériau de création. Je les choisis pour ce qu’elles provoquent en moi : un grain, une forme, une couleur, une émotion.",
+        "J’aime faire surgir, à travers ces matières, des rencontres entre mémoire et futur, entre ce qui demeure et ce qui se transforme.",
+        "Le corps tout entier est engagé. En portant l’une de mes créations, j’invite chacun à se l’approprier, à y projeter sa propre histoire et à en poursuivre le récit.",
+        "Le corps devient alors le lieu où l’œuvre continue."]),
  dict(k='amira-sliman', nom='Amira Sliman', n='04',
    credit_portrait='',
    credit_oeuvres='',
@@ -125,7 +127,7 @@ JSONLD='''<script type="application/ld+json">
 "superEvent":{"@type":"Event","name":"Parcours Bijoux Paris 2026","startDate":"2026-10-01","endDate":"2026-10-31","url":"https://www.parcoursbijoux.com"},
 "subEvent":[
  {"@type":"Event","name":"Vernissage de Gargantua","startDate":"2026-10-08T18:00:00+02:00","location":{"@type":"Place","name":"Galerie Psyché Paris","address":"18 rue du Pont Louis Philippe, 75004 Paris"}},
- {"@type":"Event","name":"Rencontre autour de Gargantua","startDate":"2026-10-08T14:00:00+02:00","location":{"@type":"Place","name":"Espace L’Échappée Belle","address":"rue du Pont Louis Philippe, 75004 Paris"}}]}
+ {"@type":"Event","name":"Rencontre autour de Gargantua","startDate":"2026-10-08T14:00:00+02:00","location":{"@type":"Place","name":"Le Peloton Studio","address":"13 rue du Pont Louis-Philippe, 75004 Paris"}}]}
 </script>'''
 
 HEAD='''<!doctype html>
@@ -141,13 +143,13 @@ HEAD='''<!doctype html>
 <meta property="og:description" content="Vous êtes invité(e)s. Agnès Dubois, Faust Cardinali, Thierry Vendome, Amira Sliman. Galerie Psyché Paris, 05 au 17 octobre 2026. Vernissage le 08 octobre à 18h.">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:url" content="https://gargantua-paris.github.io/">
-<meta property="og:image" content="https://gargantua-paris.github.io/images/affiche/affiche_gargantua.jpg">
+<meta property="og:image" content="https://gargantua-paris.github.io/images/affiche/affiche_gargantua.jpg?v=20260930">
 <meta property="og:image:width" content="1080">
 <meta property="og:image:height" content="1350">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
 <link rel="apple-touch-icon" href="favicon-180.png">
-<link rel="stylesheet" href="style.css?v=20260906d">
+<link rel="stylesheet" href="style.css?v=20260926a">
 {jsonld}
 </head>
 <body>
@@ -182,7 +184,7 @@ BODY='''
    <p><a class="carte" href="https://www.google.com/maps/search/?api=1&amp;query=Galerie+Psych%C3%A9%2C+18+rue+du+Pont+Louis+Philippe%2C+75004+Paris"
          target="_blank" rel="noopener">Galerie Psyché Paris<br>18 rue du Pont Louis Philippe<br>75004 Paris<span class="k">Voir sur la carte {fl}</span></a></p></div>
   <div><span class="lbl">Vernissage</span><p>08 octobre à 18h</p><a class="k" href="agenda/vernissage.ics">Ajouter à l’agenda {fl}</a></div>
-  <div><span class="lbl">Rencontre autour de Gargantua</span><p>08 octobre à 14h<br>Espace L’Échappée Belle<br>rue du Pont Louis Philippe<br>75004 Paris<br>Présentée par Bruno Laubin</p><a class="k" href="agenda/rencontre.ics">Ajouter à l’agenda {fl}</a></div>
+  <div><span class="lbl">Rencontre autour de Gargantua</span><p>08 octobre à 14h<br>Le Peloton Studio<br>13 rue du Pont Louis-Philippe<br>75004 Paris<br>Présentée par Bruno Laubin</p><a class="k" href="agenda/rencontre.ics">Ajouter à l’agenda {fl}</a></div>
  </div>
 </section>
 
@@ -204,7 +206,7 @@ BODY='''
 
 <section class="affiche">
  <figure>
-  <img src="images/affiche/affiche_gargantua.jpg" width="1080" height="1350" alt="Affiche Gargantua, Parcours Bijoux Paris 2026" decoding="async">
+  <img src="images/affiche/affiche_gargantua.jpg?v=20260930" width="1080" height="1350" alt="Affiche Gargantua, Parcours Bijoux Paris 2026" decoding="async">
   <figcaption><span class="lbl">Parcours Bijoux Paris 2026</span><span class="lbl">Affiche de Gargantua</span></figcaption>
  </figure>
 </section>
@@ -343,11 +345,97 @@ head=HEAD.replace('{jsonld}',JSONLD).replace('{nav}',nav).replace('{fil}',fil)
 body=BODY.replace('{noms}',noms).replace('{fl}',FL).replace('{projet}',''.join('<p>%s</p>'%p for p in PROJET)).replace('{secs}',''.join(secs))
 doc=head+typo(body)+SCRIPT
 
-open(S+'index.html','w').write(doc)
-print('index.html',len(doc),'octets')
+if '--pres' not in sys.argv:
+    open(S+'index.html','w').write(doc)
+    print('index.html',len(doc),'octets')
 
 # --- page solo Suzanne : structure d origine, reecrite seulement si le fichier existe deja dans le dossier ---
 if os.path.exists(S+'suzanne-somogyi.html'):
     solo=open(S+'suzanne-somogyi.html').read()
     open(S+'suzanne-somogyi.html','w').write(solo)
     print('suzanne-somogyi.html conserve')
+
+# ============================================================
+# presentation.html : logo, texte du projet, les quatre createurs
+# (portrait + bio) et toutes leurs pieces avec description.
+# Chaque piece peut porter un champ "desc" dans le manifest.
+# ============================================================
+def fig_piece(o,a):
+    ocred='<p class="credit">%s</p>'%a['credit_oeuvres'] if a['credit_oeuvres'] else ''
+    desc='<p>%s</p>'%o['desc'] if o.get('desc') else ''
+    return '''
+  <figure class="piece__im" role="button" tabindex="0" aria-label="Voir {titre} en grand"
+          data-full="{plein}" data-bg="{bg}" data-titre="{titre}" data-mat="{mat}" data-cred="{cred}" data-nom="{nom}">
+   <img src="{file}" width="{w}" height="{h}" alt="{titre}, {nom}" loading="lazy" decoding="async">
+   <figcaption>
+    <h3>{titre}</h3>
+    <p>{mat}</p>{desc}
+    {ocred}
+    <span class="zoom">Voir en grand {fl}</span>
+   </figcaption>
+  </figure>'''.format(titre=o['titre'],plein=o['plein'],bg=o['bg'],mat=o['matiere'],cred=a['credit_oeuvres'],
+        nom=a['nom'],file=o['file'],w=o['w'],h=o['h'],desc=desc,ocred=ocred,fl=FL)
+
+psecs=[]
+for a in ARTISTES:
+    p=po[a['k']]
+    bio=''.join('<p>%s</p>'%b for b in a['bio'])
+    pcred='<figcaption><p class="credit">%s</p></figcaption>'%a['credit_portrait'] if a['credit_portrait'] else ''
+    note='<p class="credit" style="margin-top:16px">%s</p>'%a['note'] if a.get('note') else ''
+    srcset='%s %dw'%(p['file'],p['w'])
+    if a['k'] in PORTRAIT_HD: srcset+=', %s %dw'%PORTRAIT_HD[a['k']]
+    psecs.append('''
+<section class="artiste" id="{k}">
+ <div class="artiste__h"><h2>{nom}</h2><span>{n} / 04</span></div>
+ <div class="split cr">
+  <div><figure class="pf"><img src="{pfile}" srcset="{srcset}" style="--fp:{fp}" sizes="(max-width:620px) calc(100vw - 40px), 230px" width="{pw}" height="{ph}" alt="Portrait de {nom}" loading="lazy" decoding="async">{pcred}</figure></div>
+  <div class="prose">{bio}{note}</div>
+ </div>
+ <p class="lbl grille__k">Pièces, {nb}</p>
+ <div class="grille">{pieces}
+ </div>
+</section>'''.format(k=a['k'],nom=a['nom'],n=a['n'],pfile=p['file'],srcset=srcset,fp=FOCAL[a['k']],
+        pw=p['w'],ph=p['h'],pcred=pcred,bio=bio,note=note,nb=len(oe[a['k']]),
+        pieces=''.join(fig_piece(o,a) for o in oe[a['k']])))
+
+PRES_BODY='''
+<main>
+
+<section class="hero pres" id="top">
+ <img class="logo" src="favicon-512.png" width="512" height="512" alt="G." decoding="async">
+ <p class="hero__k lbl">Parcours Bijoux Paris 2026</p>
+ <h1>Gargantua.</h1>
+ <div class="hero__sub">
+  <em>Projet initié par Amira Sliman</em>
+ </div>
+ <p class="noms">{noms}</p>
+
+ <div class="meta">
+  <div><span class="lbl">Dates</span><p>05 au 17 octobre 2026</p></div>
+  <div><span class="lbl">Lieu</span><p>Galerie Psyché Paris<br>18 rue du Pont Louis Philippe<br>75004 Paris</p></div>
+  <div><span class="lbl">Vernissage</span><p>08 octobre à 18h</p></div>
+  <div><span class="lbl">Rencontre autour de Gargantua</span><p>08 octobre à 14h<br>Le Peloton Studio, 13 rue du Pont Louis-Philippe<br>Présentée par Bruno Laubin</p></div>
+ </div>
+</section>
+
+<section>
+ <div class="split">
+  <div><span class="lbl">Le projet</span></div>
+  <div class="prose">{projet}</div>
+ </div>
+ <div class="rule"></div>
+</section>
+
+{secs}
+
+</main>
+'''
+PRES_HEAD=HEAD.replace('<title>Gargantua · Parcours Bijoux 2026</title>','<title>Gargantua · Présentation</title>')\
+ .replace('content="https://gargantua-paris.github.io/"','content="https://gargantua-paris.github.io/presentation.html"')\
+ .replace('<a class="bar__b" href="#top">Gargantua</a>','<a class="bar__b" href="#top">Gargantua</a>')
+vue_et_pied=BODY[BODY.index('<div class="vue"'):]
+pres=PRES_HEAD.replace('{jsonld}',JSONLD).replace('{nav}',nav).replace('{fil}',fil) \
+ + typo(PRES_BODY.replace('{noms}',noms).replace('{projet}',''.join('<p>%s</p>'%p for p in PROJET)).replace('{secs}',''.join(psecs)).replace('{fl}',FL)
+        + vue_et_pied.replace('{fl}',FL)) + SCRIPT
+open(S+'presentation.html','w').write(pres)
+print('presentation.html',len(pres),'octets')
