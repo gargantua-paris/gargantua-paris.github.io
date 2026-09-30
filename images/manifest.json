@@ -3,7 +3,7 @@
   {
    "artist": "thierry-vendome",
    "titre": "LE PASSAGE",
-   "matiere": "Corolle de rouille, saphir rose (3,66 ct), saphirs roses, or jaune plissé.",
+   "matiere": "Bague-pendentif. Corolle de rouille, saphir rose (3,66 ct), saphirs roses, or jaune plissé.",
    "src": "~/Desktop/JPEG image.jpeg",
    "file": "images/oeuvres/thierry-vendome_01_le-passage_m.jpg",
    "w": 1208,
@@ -42,7 +42,7 @@
   {
    "artist": "faust-cardinali",
    "titre": "GARGANTUA",
-   "matiere": "Bague. Fonte d’aluminium, creuset en argent, polyester.",
+   "matiere": "Bague. Gargantua 2026.",
    "src": "~/Desktop/FAUST CARDINALI/FAUST CARDINALI_ GARGANTUA_BAGUE.jpg",
    "file": "images/oeuvres/faust-cardinali_03_gargantua_m.jpg",
    "w": 1400,
@@ -55,7 +55,7 @@
   {
    "artist": "faust-cardinali",
    "titre": "BÂT-STARTER II",
-   "matiere": "Bracelet, outil et dispositif de performance.",
+   "matiere": "Bracelet, bijou, outil et dispositif de performance. Gargantua 2026.",
    "src": "~/Desktop/FAUST CARDINALI/GARGANTUA_ FAUST CARDINALI_BAT-STARTER II (GARGANTUA)_6.jpg",
    "file": "images/oeuvres/faust-cardinali_04_bat-starter-ii_m.jpg",
    "w": 1400,
@@ -159,7 +159,7 @@
   {
    "artist": "agnes-dubois",
    "titre": "SILÈNES",
-   "matiere": "Collier. Laiton patiné et corne. 2026.",
+   "matiere": "Collier et bijou de buste. Laiton patiné et corne de bovin. 2026.",
    "src": "~/Desktop/Agnes Dubois Silenes Collier (1).JPG",
    "file": "images/oeuvres/agnes-dubois_03_silenes_m.jpg",
    "w": 704,
@@ -167,20 +167,20 @@
    "plein": "images/oeuvres/agnes-dubois_03_silenes.jpg",
    "pw": 1207,
    "ph": 2400,
-   "bg": "#f5f6f8"
+   "bg": "#ffffff"
   },
   {
    "artist": "agnes-dubois",
    "titre": "SILÈNES",
-   "matiere": "Collier. Laiton patiné et corne. 2026.",
+   "matiere": "Collier et bijou de buste. Laiton patiné et corne de bovin. 2026.",
    "src": "~/Desktop/Agnes Dubois Silenes Collier (2).JPG",
-   "file": "images/oeuvres/agnes-dubois_04_silenes_m.jpg",
+   "file": "images/oeuvres/agnes-dubois_04_silenes_m_blanc.jpg",
    "w": 694,
    "h": 1400,
-   "plein": "images/oeuvres/agnes-dubois_04_silenes.jpg",
+   "plein": "images/oeuvres/agnes-dubois_04_silenes_blanc.jpg",
    "pw": 1190,
    "ph": 2400,
-   "bg": "#f4f8fd"
+   "bg": "#ffffff"
   }
  ],
  "portraits": {
