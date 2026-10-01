@@ -61,7 +61,7 @@ def esc(s): return s
 NB=' '   # espace fine insecable : francais avant : ; ! ? et dans les guillemets
 # regles de composition francaises, appliquees au texte seulement (jamais dans les balises, scripts, styles) :
 # pas de petit mot en fin de ligne (et, de, la, un...), nombre colle a ce qui suit, mot compose jamais coupe a son trait d'union
-PETITS=r"(?:et|ou|ni|où|à|a|de|du|des|le|la|les|un|une|en|au|aux|y|ne|se|ce|ces|sa|son|ses|ma|mon|mes|ta|ton|tes|je|tu|il|on|nous|vous|qui|que|par|sur|pour|dans|avec|sans|est|son|leur|leurs|cet|cette|plus|tout|pas|si|lui|elle)"
+PETITS=r"(?:et|ou|ni|où|à|a|de|du|des|le|la|les|un|une|en|au|aux|y|ne|se|ce|ces|sa|son|ses|ma|mon|mes|ta|ton|tes|je|tu|il|on|nous|vous|qui|que|par|sur|pour|dans|avec|sans|est|son|leur|leurs|cet|cette|plus|tout|pas|si|lui|elle|ils|elles)"
 INS='\u00a0'   # espace insecable
 def _texte(t):
     t=re.sub(r'(?<=\S) (?=[:;!?»])', NB, t)
@@ -69,6 +69,7 @@ def _texte(t):
     # les petits mots restent avec le mot qui suit (« et une nouvelle » part ensemble a la ligne)
     t=re.sub(r"(?i)(?<![\w’'-])(%s) "%PETITS, lambda m:m.group(1)+INS, t)
     t=re.sub(r"(?<=\d) (?=\S)", INS, t)
+    t=re.sub(r"(?<=[a-zà-ÿ]) (?=\d)", INS, t)   # « argent 925/1000e » ne se separe pas
     t=re.sub(r"(?<![\w-])(\w+(?:-\w+)+)(?![\w-])", r'<span style="white-space:nowrap">\1</span>', t)
     return t
 def typo(s):
@@ -90,7 +91,7 @@ def navlab(nom):
     return '<span class="fn">%s </span>%s'%(pre,last)
 nav=''.join('<a href="#%s">%s</a>'%(a['k'],navlab(a['nom'])) for a in ARTISTES)
 fil=''.join('<a href="#%s">%s</a>'%(a['k'],a['nom']) for a in ARTISTES)
-noms=', '.join('<a href="#%s">%s</a>'%(a['k'],a['nom']) for a in ARTISTES)
+noms=', '.join('<a href="#%s" style="white-space:nowrap">%s</a>'%(a['k'],a['nom']) for a in ARTISTES)
 
 secs=[]
 for i,a in enumerate(ARTISTES):
