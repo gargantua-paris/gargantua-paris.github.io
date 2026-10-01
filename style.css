@@ -240,7 +240,7 @@ footer{margin-top:clamp(80px,12vh,170px);
   .affiche figcaption .lbl{white-space:nowrap}
 
   .split{margin-top:52px}
-  .prose{-webkit-hyphens:auto;hyphens:auto;hyphenate-limit-chars:9 4 4;-webkit-hyphenate-limit-before:4;-webkit-hyphenate-limit-after:4}
+  .prose{-webkit-hyphens:manual;hyphens:manual;hyphenate-limit-chars:9 4 4;-webkit-hyphenate-limit-before:4;-webkit-hyphenate-limit-after:4}
   .prose p{max-width:none}
 
   .artiste{scroll-margin-top:calc(env(safe-area-inset-top) + 88px);padding-top:64px}

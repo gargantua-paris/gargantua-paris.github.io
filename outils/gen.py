@@ -44,7 +44,7 @@ ARTISTES=[
    credit_oeuvres='',
    bio=["Diplômée en Design Industriel de l’École des Beaux-Arts de Tunis et de l’AFEDAP (1997). En 2003, je fonde ma galerie de bijoux contemporains à Paris, que je dirige depuis.",
         "Mon approche du bijou s’apparente à celle d’un architecte : je conçois mes pièces comme des « architectures à porter », aux lignes fluides, épurées et intemporelles.",
-        "Ma recherche artistique repose sur l’équilibre — entre les formes, les matières, les couleurs — et sur une quête de complémentarité.",
+        "Ma recherche artistique repose sur l’équilibre : entre les formes, les matières, les couleurs, et sur une quête de complémentarité.",
         "La nature constitue ma principale source d’inspiration : structures végétales, ossatures, textures organiques nourrissent mon imaginaire. Je privilégie les matériaux naturels : pierres que je taille, bois, plumes…",
         "Le bijou n’est pas un simple ornement ; il représente un lien du corps au monde, un objet porteur de sens. Ce lien est lui aussi une quête : celle de la reconnaissance de la place de l’individu dans un groupe.",
         "Depuis quelques années, mes pièces uniques sont donc construites comme des chapitres de vie, ils racontent mon propre rapport au monde."]),
@@ -59,10 +59,20 @@ PROJET=["Gargantua, au-delà du personnage truculent imaginé par Rabelais, inca
 def esc(s): return s
 
 NB=' '   # espace fine insecable : francais avant : ; ! ? et dans les guillemets
+# regles de composition francaises, appliquees au texte seulement (jamais dans les balises, scripts, styles) :
+# pas de petit mot en fin de ligne (et, de, la, un...), nombre colle a ce qui suit, mot compose jamais coupe a son trait d'union
+PETITS=r"(?:et|ou|ni|où|à|a|de|du|des|le|la|les|un|une|en|au|aux|y|ne|se|ce|ces|sa|son|ses|ma|mon|mes|ta|ton|tes|je|tu|il|on|nous|vous|qui|que|par|sur|pour|dans|avec|sans|est|son|leur|leurs|cet|cette|plus|tout|pas|si|lui|elle)"
+INS='\u00a0'   # espace insecable
+def _texte(t):
+    t=re.sub(r'(?<=\S) (?=[:;!?»])', NB, t)
+    t=t.replace('« ','«'+NB)
+    t=re.sub(r"(?i)(?<![\w’'-])(%s) "%PETITS, lambda m:m.group(1)+INS, t)
+    t=re.sub(r"(?<=\d) (?=\S)", INS, t)
+    t=re.sub(r"(?<![\w-])(\w+(?:-\w+)+)(?![\w-])", r'<span style="white-space:nowrap">\1</span>', t)
+    return t
 def typo(s):
-    s=re.sub(r'(?<=\S) (?=[:;!?»])', NB, s)
-    s=s.replace('« ','«'+NB)
-    return s
+    parts=re.split(r'(<script.*?</script>|<style.*?</style>|<[^>]+>)', s, flags=re.S)
+    return ''.join(x if i%2 else _texte(x) for i,x in enumerate(parts))
 
 FL='<svg class="fl" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.6 9.4 9.4 2.6M4.3 2.6h5.1v5.1"/></svg>'
 
@@ -149,7 +159,7 @@ HEAD='''<!doctype html>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
 <link rel="apple-touch-icon" href="favicon-180.png">
-<link rel="stylesheet" href="style.css?v=20260926a">
+<link rel="stylesheet" href="style.css?v=20261001a">
 {jsonld}
 </head>
 <body>
