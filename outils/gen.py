@@ -10,7 +10,7 @@ PIECE_AFFICHE={'agnes-dubois':3,'faust-cardinali':1,'thierry-vendome':0,'amira-s
 
 ARTISTES=[
  dict(k='agnes-dubois', nom='Agnès Dubois', n='01',
-   credit_portrait='Portrait : galerie bettina flament',
+   credit_portrait='Crédit photo : Manon Dubois',
    credit_oeuvres='Photo : Agnès Dubois',
    bio=["Ma vocation de créatrice indépendante débute dès 2001 après une formation de deux ans à l’AFEDAP Paris.",
         "J’envisage le bijou comme un champ plastique à part entière, un médium à travers lequel j’observe la relation entre le corps et le monde qui l’environne. Tel un marqueur identitaire, il agit comme un véritable vecteur de communication, capable de signifier autant que de parer.",
@@ -30,8 +30,8 @@ ARTISTES=[
         "Mes créations traduisent la liquidité du monde contemporain, marquée par les blessures historiques, psychologiques et géologiques, révélant de nouvelles formes de « polycorps » : une conception de l’art non pas in situ, mais in tempore.",
         "Mes œuvres figurent dans d’importantes collections en Europe et en Asie."]),
  dict(k='thierry-vendome', nom='Thierry Vendome', n='03',
-   credit_portrait='Thierry Vendome, crédit photo : Olivier Foulon',
-   credit_oeuvres='Photo : @olivierfoulonstudio',
+   credit_portrait='Crédit photo : Olivier Foulon',
+   credit_oeuvres='Crédit photo : Olivier Foulon',
    bio=["<span class=\"up\">MES BIJOUX SONT DES ACTES POÉTIQUES</span>",
         "Je ne cherche pas tant à représenter le visible qu’à exprimer les émotions qui me traversent lorsque j’observe le monde.",
         "Depuis les années 1980, je travaille avec des matières « vivantes », celles qui portent en elles une histoire. Fragments d’éclats d’obus, clous rouillés, fils de fer barbelé, minéraux… Je les dévie de leur trajectoire. Je les fais entrer dans une nouvelle histoire.",
