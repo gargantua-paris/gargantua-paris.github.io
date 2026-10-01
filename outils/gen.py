@@ -66,6 +66,7 @@ INS='\u00a0'   # espace insecable
 def _texte(t):
     t=re.sub(r'(?<=\S) (?=[:;!?»])', NB, t)
     t=t.replace('« ','«'+NB)
+    # les petits mots restent avec le mot qui suit (« et une nouvelle » part ensemble a la ligne)
     t=re.sub(r"(?i)(?<![\w’'-])(%s) "%PETITS, lambda m:m.group(1)+INS, t)
     t=re.sub(r"(?<=\d) (?=\S)", INS, t)
     t=re.sub(r"(?<![\w-])(\w+(?:-\w+)+)(?![\w-])", r'<span style="white-space:nowrap">\1</span>', t)
