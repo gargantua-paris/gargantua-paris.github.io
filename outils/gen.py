@@ -160,7 +160,7 @@ HEAD='''<!doctype html>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
 <link rel="apple-touch-icon" href="favicon-180.png">
-<link rel="stylesheet" href="style.css?v=20261001a">
+<link rel="stylesheet" href="style.css?v=20261001b">
 {jsonld}
 </head>
 <body>
